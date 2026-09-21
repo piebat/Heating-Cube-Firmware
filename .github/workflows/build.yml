@@ -1,0 +1,36 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: idf.py build (esp32s3)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # sdkconfig is untracked (it holds local Wi-Fi/MQTT credentials), so the
+      # build normally regenerates it from sdkconfig.defaults. Belt and braces
+      # in case it is ever committed by mistake.
+      - name: Use default configuration
+        run: rm -f sdkconfig
+
+      - uses: espressif/esp-idf-ci-action@v1
+        with:
+          esp_idf_version: v6.1
+          target: esp32s3
+          path: '.'
+
+      - name: Upload firmware image
+        uses: actions/upload-artifact@v4
+        with:
+          name: heating-cube-firmware
+          path: |
+            build/*.bin
+            build/*.elf
+            build/flash_args
+          if-no-files-found: error

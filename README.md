@@ -4,6 +4,21 @@ ESP32-S3 firmware for a three-zone heating controller. Each zone pairs an NTC
 thermistor, a capacitive touch pad and a MOSFET-driven heating element under
 independent PID control, with Wi-Fi and MQTT for configuration and telemetry.
 
+## Status
+
+[![build](https://github.com/piebat/Heating-Cube-Firmware/actions/workflows/build.yml/badge.svg)](https://github.com/piebat/Heating-Cube-Firmware/actions/workflows/build.yml)
+![target](https://img.shields.io/badge/target-ESP32--S3-blue)
+![ESP-IDF](https://img.shields.io/badge/ESP--IDF-v6.1-orange)
+
+Every push and pull request builds the firmware with ESP-IDF v6.1 for
+`esp32s3`; the badge above reflects that build, and the resulting `.bin` is
+attached to each run as an artifact.
+
+The image has also been flashed and run on the hardware: all three zones
+regulate under PID, touch-gated sessions start and stop as described, and MQTT
+telemetry publishes on `heating_cube/status`. Hardware behaviour is verified by
+hand, not by CI — last checked against commit `b722e2c`.
+
 ## Hardware
 
 | Zone | NTC (ADC1) | Touch pad | Heater gate |
