@@ -1,0 +1,4 @@
+dependencies:
+  # The MQTT client left the core IDF components in v6.x; it is now pulled
+  # from the component registry.
+  espressif/mqtt: "^1.0.0"

@@ -1,0 +1,24 @@
+menu "Heating controller"
+
+    config HEATING_WIFI_SSID
+        string "Wi-Fi SSID"
+        default "myssid"
+
+    config HEATING_WIFI_PASSWORD
+        string "Wi-Fi password"
+        default "mypassword"
+
+    config HEATING_MQTT_URI
+        string "MQTT broker URI"
+        default "mqtt://192.168.1.10:1883"
+        help
+            For example mqtt://host:1883 or mqtts://host:8883.
+
+    config HEATING_MAX_TEMP_C
+        int "Safety cut-out temperature (degC)"
+        default 120
+        help
+            The heater is forced off above this reading and stays off
+            until the temperature drops back below it.
+
+endmenu
